@@ -1,10 +1,8 @@
 <?php
 return array(
     'modules' => array(
-        'Wall',
         'Common',
-        'Feeds',
-        'Users'
+        'Keep',
     ),
     'module_listener_options' => array(
         'config_glob_paths'    => array(

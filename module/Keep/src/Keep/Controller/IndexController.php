@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Users\Controller;
+namespace Keep\Controller;
 
 use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\View\Model\JsonModel;
@@ -25,14 +25,8 @@ class IndexController extends AbstractRestfulController
      *
      * @var UsersTable
      */
-    protected $usersTable;
-    
-    /**
-     * Holds the table object
-     *
-     * @var UserImagesTable
-     */
-    protected $userImagesTable;
+    protected $heroTable;
+//  protected $userImagesTable;
     
     /**
      * Method not available for this endpoint

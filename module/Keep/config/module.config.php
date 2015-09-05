@@ -10,12 +10,12 @@
 return array(
     'router' => array(
         'routes' => array(
-            'admin_add' => array(
+            'keep-heroadd' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route' => '/admin/heros/add[/]',
+                    'route' => '/keep/hero/add[/]',
                     'defaults' => array(
-                        'controller' => 'Heros\Controller\Index',
+                        'controller' => 'Keep\Controller\Index',
                         'action' => 'heroadd',
                     ),
                 ),
@@ -34,12 +34,12 @@ return array(
     ),
     'di' => array(
         'services' => array(
-            'Heros\Model\HeroTable' => 'Heros\Model\HeroTable',
+            'Keep\Model\HeroTable' => 'Keep\Model\HeroTable',
         )
     ),
     'controllers' => array(
         'invokables' => array(
-            'Heros\Controller\Index' => 'Heros\Controller\IndexController',
+            'Keep\Controller\Index' => 'Keep\Controller\IndexController',
         ),
     ),
 );
