@@ -14,29 +14,67 @@ use Zend\View\Model\JsonModel;
 use Zend\Crypt\Password\Bcrypt;
 
 /**
- * This class is the responsible to answer the requests to the /wall endpoint
- *
- * @package Wall/Controller
+
  */
 class IndexController extends AbstractRestfulController
 {
     /**
-     * Holds the table object
-     *
-     * @var UsersTable
      */
     protected $heroTable;
-//  protected $userImagesTable;
-    
-    /**
-     * Method not available for this endpoint
-     *
-     * @return void
-     */
+
     public function HeroaddAction()
     {
-    die('heroaddAction function');
+        $heroTable = $this->getHeroTable();
+        $filters = $heroTable->getInputFilter();
+//        print($unfilteredData);
+//        die('dddddddddddddddddddd');
+//        $filters->setData($unfilteredData);
+        if ($filters->isValid()) {
+            die('heroaddAction function');
+            $data = $filters->getValues();
+
+            $avatarContent = array_key_exists('avatar', $unfilteredData) ? $unfilteredData['avatar'] : NULL;
+
+            $bcrypt = new Bcrypt();
+            $data['password'] = $bcrypt->create($data['password']);
+
+            if ($usersTable->create($data)) {
+                if (!empty($avatarContent)) {
+                    $userImagesTable = $this->getUserImagesTable();
+                    $user = $usersTable->getByUsername($data['username']);
+
+                    $filename = sprintf('public/images/%s.png', sha1(uniqid(time(), TRUE)));
+                    $content = base64_decode($avatarContent);
+                    $image = imagecreatefromstring($content);
+
+                    if (imagepng($image, $filename) === TRUE) {
+                        $userImagesTable->create($user['id'], basename($filename));
+                    }
+                    imagedestroy($image);
+
+                    $image = $userImagesTable->getByFilename(basename($filename));
+                    $usersTable->updateAvatar($image['id'], $user['id']);
+                }
+
+                $result = new JsonModel(array(
+                    'result' => true
+                ));
+            } else {
+                $result = new JsonModel(array(
+                    'result' => false
+                ));
+            }
+        } else {
+            $result = new JsonModel(array(
+                'result' => false,
+                'errors' => $filters->getMessages()
+            ));
+        }
+
+        return $result;
+
     }
+
     public function get($username)
     {
         die('get function');
@@ -72,38 +110,26 @@ class IndexController extends AbstractRestfulController
      */
     public function create($unfilteredData)
     {
-        die('create');
-    	$usersTable = $this->getUsersTable();
-        
-        $filters = $usersTable->getInputFilter();
+    	$heroTable = $this->getHeroTable();
+//        print_r($heroTable);
+        $filters = $heroTable->getInputFilter();
+//        print_r($filters);
+//        die('');
         $filters->setData($unfilteredData);
-        
+//        print_r($unfilteredData);
+//        die('');
         if ($filters->isValid()) {
+//            die('filter is valid');
             $data = $filters->getValues();
-            
-            $avatarContent = array_key_exists('avatar', $unfilteredData) ? $unfilteredData['avatar'] : NULL;
+//            print_r($data);
+//            die('');
+/*            $avatarContent = array_key_exists('avatar', $unfilteredData) ? $unfilteredData['avatar'] : NULL;
             
             $bcrypt = new Bcrypt();
             $data['password'] = $bcrypt->create($data['password']);
-            
-            if ($usersTable->create($data)) {
-                if (!empty($avatarContent)) {
-                    $userImagesTable = $this->getUserImagesTable();
-                    $user = $usersTable->getByUsername($data['username']);
-                    
-                    $filename = sprintf('public/images/%s.png', sha1(uniqid(time(), TRUE)));
-                    $content = base64_decode($avatarContent);
-                    $image = imagecreatefromstring($content);
-                    
-                    if (imagepng($image, $filename) === TRUE) {
-                        $userImagesTable->create($user['id'], basename($filename));
-                    }
-                    imagedestroy($image);
-                    
-                    $image = $userImagesTable->getByFilename(basename($filename));
-                    $usersTable->updateAvatar($image['id'], $user['id']);
-                }
-                
+*/
+            if ($heroTable->create($data)) {
+//                die('createdtable');
                 $result = new JsonModel(array(
                     'result' => true
                 ));
@@ -113,6 +139,7 @@ class IndexController extends AbstractRestfulController
                 )); 
             }
         } else {
+            die('filter is not valid');
             $result = new JsonModel(array(
                 'result' => false,
                 'errors' => $filters->getMessages()
@@ -155,13 +182,13 @@ class IndexController extends AbstractRestfulController
      *
      * @return UsersTable
      */
-    protected function getUsersTable()
+    protected function getHeroTable()
     {
-        if (!$this->usersTable) {
+        if (!$this->heroTable) {
             $sm = $this->getServiceLocator();
-            $this->usersTable = $sm->get('Users\Model\UsersTable');
+            $this->heroTable = $sm->get('Keep\Model\HeroTable');
         }
-        return $this->usersTable;
+        return $this->heroTable;
     }
     
     /**

@@ -16,7 +16,7 @@ return array(
                     'route' => '/keep/hero/add[/]',
                     'defaults' => array(
                         'controller' => 'Keep\Controller\Index',
-                        'action' => 'heroadd',
+//                        'action' => 'heroadd',
                     ),
                 ),
             ),

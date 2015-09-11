@@ -1,5 +1,5 @@
 <?php
-namespace Heros\Model;
+namespace Keep\Model;
 
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\TableGateway\AbstractTableGateway;
@@ -54,13 +54,18 @@ class HeroTable extends AbstractTableGateway implements AdapterAwareInterface
         );
     }
 */
+    public function create($heroData)
+    {
+//        $heroData['created_at'] = new Expression('NOW()');
+        return $this->insert($heroData);
+    }
     public function getInputFilter()
     {
         $inputFilter = new InputFilter();
         $factory = new InputFactory();
-        
+
         $inputFilter->add($factory->createInput(array(
-            'name'     => 'username',
+            'name'     => 'heroname',
             'required' => true,
             'filters'  => array(
                 array('name' => 'StripTags'),
@@ -80,14 +85,74 @@ class HeroTable extends AbstractTableGateway implements AdapterAwareInterface
                 array(
                     'name' => 'Zend\Validator\Db\NoRecordExists',
                     'options' => array(
-                        'table' => 'users',
-                        'field' => 'username',
+                        'table' => 'hero',
+                        'field' => 'heroname',
                         'adapter' => $this->adapter
                     )
                 )
             ),
         )));
-        
+
+        $inputFilter->add($factory->createInput(array(
+            'name'     => 'vocationid',
+            'required' => true,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+                array(
+                    'name' => 'NotEmpty',
+                ),
+                array(
+                    'name' => 'StringLength',
+                    'options' => array(
+                        'min' => 1,
+                        'max' => 50
+                    ),
+                ),
+            ),
+        )));
+
+        $inputFilter->add($factory->createInput(array(
+            'name'     => 'raceid',
+            'required' => true,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+                array(
+                    'name' => 'NotEmpty',
+                ),
+                array(
+                    'name' => 'StringLength',
+                    'options' => array(
+                        'min' => 1,
+                        'max' => 50
+                    ),
+                ),
+            ),
+        )));
+
+        $inputFilter->add($factory->createInput(array(
+            'name'     => 'gender',
+            'required' => false,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+                array('name' => 'Int'),
+            ),
+            'validators' => array(
+                array(
+                    'name' => 'InArray',
+                    'options' => array(
+                        'haystack' => array('0', '1')
+                    )
+                ),
+            ),
+        )));
+        /*
         $inputFilter->add($factory->createInput(array(
             'name'     => 'email',
             'required' => true,
@@ -119,7 +184,7 @@ class HeroTable extends AbstractTableGateway implements AdapterAwareInterface
                 )
             ),
         )));
-        
+
         $inputFilter->add($factory->createInput(array(
             'name'     => 'password',
             'required' => true,
@@ -133,7 +198,7 @@ class HeroTable extends AbstractTableGateway implements AdapterAwareInterface
                 ),
             ),
         )));
-        
+
         $inputFilter->add($factory->createInput(array(
             'name'     => 'name',
             'required' => true,
@@ -154,7 +219,7 @@ class HeroTable extends AbstractTableGateway implements AdapterAwareInterface
                 ),
             ),
         )));
-        
+
         $inputFilter->add($factory->createInput(array(
             'name'     => 'surname',
             'required' => true,
@@ -175,7 +240,7 @@ class HeroTable extends AbstractTableGateway implements AdapterAwareInterface
                 ),
             ),
         )));
-        
+
         $inputFilter->add($factory->createInput(array(
             'name'     => 'bio',
             'required' => false,
@@ -184,7 +249,7 @@ class HeroTable extends AbstractTableGateway implements AdapterAwareInterface
                 array('name' => 'StringTrim'),
             ),
         )));
-        
+
         $inputFilter->add($factory->createInput(array(
             'name'     => 'location',
             'required' => false,
@@ -193,24 +258,7 @@ class HeroTable extends AbstractTableGateway implements AdapterAwareInterface
                 array('name' => 'StringTrim'),
             ),
         )));
-        
-        $inputFilter->add($factory->createInput(array(
-            'name'     => 'gender',
-            'required' => false,
-            'filters'  => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-                array('name' => 'Int'),
-            ),
-            'validators' => array(
-                array(
-                    'name' => 'InArray',
-                    'options' => array(
-                        'haystack' => array('0', '1')
-                    )
-                ),
-            ),
-        )));
+*/
         
         return $inputFilter;
     }
