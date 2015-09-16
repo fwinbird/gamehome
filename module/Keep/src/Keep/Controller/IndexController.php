@@ -33,13 +33,13 @@ class IndexController extends AbstractRestfulController
             die('heroaddAction function');
             $data = $filters->getValues();
 
+/**
             $avatarContent = array_key_exists('avatar', $unfilteredData) ? $unfilteredData['avatar'] : NULL;
-
             $bcrypt = new Bcrypt();
             $data['password'] = $bcrypt->create($data['password']);
-
+*/
             if ($usersTable->create($data)) {
-                if (!empty($avatarContent)) {
+/**                if (!empty($avatarContent)) {
                     $userImagesTable = $this->getUserImagesTable();
                     $user = $usersTable->getByUsername($data['username']);
 
@@ -55,7 +55,7 @@ class IndexController extends AbstractRestfulController
                     $image = $userImagesTable->getByFilename(basename($filename));
                     $usersTable->updateAvatar($image['id'], $user['id']);
                 }
-
+*/
                 $result = new JsonModel(array(
                     'result' => true
                 ));

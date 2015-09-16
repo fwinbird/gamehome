@@ -20,6 +20,61 @@ return array(
                     ),
                 ),
             ),
+
+            'keep-campadd' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/keep/camp/add[/]',
+                    'defaults' => array(
+                        'controller' => 'Keep\Controller\Index',
+//                        'action' => 'campadd',
+                    ),
+                ),
+            ),
+
+            'keep-raceadd' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/keep/race/add[/]',
+                    'defaults' => array(
+                        'controller' => 'Keep\Controller\Index',
+//                        'action' => 'raceadd',
+                    ),
+                ),
+            ),
+
+            'keep-skilladd' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/keep/skill/add[/]',
+                    'defaults' => array(
+                        'controller' => 'Keep\Controller\Index',
+//                        'action' => 'skilladd',
+                    ),
+                ),
+            ),
+
+            'keep-stepadd' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/keep/step/add[/]',
+                    'defaults' => array(
+                        'controller' => 'Keep\Controller\Index',
+//                        'action' => 'stepadd',
+                    ),
+                ),
+            ),
+
+            'keep-vocationadd' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/keep/vocation/add[/]',
+                    'defaults' => array(
+                        'controller' => 'Keep\Controller\Index',
+//                        'action' => 'vocationadd',
+                    ),
+                ),
+            ),
 /*            'admin_add' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
