@@ -22,26 +22,26 @@ class HeroTable extends AbstractTableGateway implements AdapterAwareInterface
         $this->adapter = $adapter;
         $this->initialize();
     }
-    
+
 /**
     public function getByUsername($username)
     {
         $rowset = $this->select(array('username' => $username));
-        
+
         return $rowset->current();
     }
 
     public function getById($id)
     {
         $rowset = $this->select(array('id' => $id));
-        
+
         return $rowset->current();
     }
 
     public function create($userData)
     {
         $userData['created_at'] = new Expression('NOW()');
-        
+
         return $this->insert($userData);
     }
 
@@ -56,7 +56,7 @@ class HeroTable extends AbstractTableGateway implements AdapterAwareInterface
 */
     public function create($heroData)
     {
-        $heroData['createdAt'] = new Expression('NOW()');
+        $heroData['CreatedAt'] = new Expression('NOW()');
         return $this->insert($heroData);
     }
     public function getInputFilter()

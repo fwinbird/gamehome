@@ -11,9 +11,6 @@ use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\View\Model\JsonModel;
 use Zend\Crypt\Password\Bcrypt;
 
-/**
-
- */
 class CampController extends AbstractRestfulController
 {
     protected $campTable;
@@ -67,11 +64,6 @@ class CampController extends AbstractRestfulController
             $data = $filters->getValues();
 //            print_r($data);
 //            die('');
-            /*            $avatarContent = array_key_exists('avatar', $unfilteredData) ? $unfilteredData['avatar'] : NULL;
-
-                        $bcrypt = new Bcrypt();
-                        $data['password'] = $bcrypt->create($data['password']);
-            */
             if ($campTable->create($data)) {
 //                die('createdtable');
                 $result = new JsonModel(array(

@@ -41,7 +41,7 @@ class HeroController extends AbstractRestfulController
      */
     public function getList()
     {
-        die('getlist');
+        die('getlist  herocontroller');
         $this->methodNotAllowed();
     }
 
