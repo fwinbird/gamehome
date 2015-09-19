@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: ZGK
+ * Date: 2015/9/19
+ * Time: 18:39
+ */
 namespace Keep\Model;
 
 use Zend\Db\Adapter\Adapter;
@@ -8,10 +14,10 @@ use Zend\Db\Sql\Expression;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Factory as InputFactory;
 
-class HeroTable extends AbstractTableGateway implements AdapterAwareInterface
+class CampTable extends AbstractTableGateway implements AdapterAwareInterface
 {
-    protected $table = 'hero';
-    
+    protected $table = 'camp';
+
     /**
      * Set db adapter
      *
@@ -22,42 +28,11 @@ class HeroTable extends AbstractTableGateway implements AdapterAwareInterface
         $this->adapter = $adapter;
         $this->initialize();
     }
-    
-/**
-    public function getByUsername($username)
-    {
-        $rowset = $this->select(array('username' => $username));
-        
-        return $rowset->current();
-    }
 
-    public function getById($id)
+    public function create($campData)
     {
-        $rowset = $this->select(array('id' => $id));
-        
-        return $rowset->current();
-    }
-
-    public function create($userData)
-    {
-        $userData['created_at'] = new Expression('NOW()');
-        
-        return $this->insert($userData);
-    }
-
-    public function updateAvatar($imageId, $userId)
-    {
-        return $this->update(array(
-            'avatar_id' => $imageId
-        ), array(
-            'id' => $userId)
-        );
-    }
-*/
-    public function create($heroData)
-    {
-        $heroData['createdAt'] = new Expression('NOW()');
-        return $this->insert($heroData);
+        $campData['createdAt'] = new Expression('NOW()');
+        return $this->insert($campData);
     }
     public function getInputFilter()
     {
@@ -65,7 +40,7 @@ class HeroTable extends AbstractTableGateway implements AdapterAwareInterface
         $factory = new InputFactory();
 
         $inputFilter->add($factory->createInput(array(
-            'name'     => 'heroname',
+            'name'     => 'campname',
             'required' => true,
             'filters'  => array(
                 array('name' => 'StripTags'),
@@ -85,8 +60,8 @@ class HeroTable extends AbstractTableGateway implements AdapterAwareInterface
                 array(
                     'name' => 'Zend\Validator\Db\NoRecordExists',
                     'options' => array(
-                        'table' => 'hero',
-                        'field' => 'heroname',
+                        'table' => 'camp',
+                        'field' => 'campname',
                         'adapter' => $this->adapter
                     )
                 )
@@ -94,6 +69,27 @@ class HeroTable extends AbstractTableGateway implements AdapterAwareInterface
         )));
 
         $inputFilter->add($factory->createInput(array(
+            'name'     => 'textcn',
+            'required' => true,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+                array(
+                    'name' => 'NotEmpty',
+                ),
+                array(
+                    'name' => 'StringLength',
+                    'options' => array(
+                        'min' => 1,
+                        'max' => 50
+                    ),
+                ),
+            ),
+        )));
+
+/*        $inputFilter->add($factory->createInput(array(
             'name'     => 'vocationid',
             'required' => true,
             'filters'  => array(
@@ -152,6 +148,7 @@ class HeroTable extends AbstractTableGateway implements AdapterAwareInterface
                 ),
             ),
         )));
+*/
         /*
         $inputFilter->add($factory->createInput(array(
             'name'     => 'email',
@@ -259,7 +256,7 @@ class HeroTable extends AbstractTableGateway implements AdapterAwareInterface
             ),
         )));
 */
-        
+
         return $inputFilter;
     }
 }

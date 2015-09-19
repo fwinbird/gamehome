@@ -15,7 +15,8 @@ return array(
                 'options' => array(
                     'route' => '/keep/hero/add[/]',
                     'defaults' => array(
-                        'controller' => 'Keep\Controller\Index',
+//                        'controller' => 'Keep\Controller\Index',
+                        'controller' => 'Hero\Controller\Add',
 //                        'action' => 'heroadd',
                     ),
                 ),
@@ -26,7 +27,7 @@ return array(
                 'options' => array(
                     'route' => '/keep/camp/add[/]',
                     'defaults' => array(
-                        'controller' => 'Keep\Controller\Index',
+                        'controller' => 'Camp\Controller\Add',
 //                        'action' => 'campadd',
                     ),
                 ),
@@ -37,7 +38,7 @@ return array(
                 'options' => array(
                     'route' => '/keep/race/add[/]',
                     'defaults' => array(
-                        'controller' => 'Keep\Controller\Index',
+                        'controller' => 'Race\Controller\Add',
 //                        'action' => 'raceadd',
                     ),
                 ),
@@ -48,7 +49,7 @@ return array(
                 'options' => array(
                     'route' => '/keep/skill/add[/]',
                     'defaults' => array(
-                        'controller' => 'Keep\Controller\Index',
+                        'controller' => 'Skill\Controller\Add',
 //                        'action' => 'skilladd',
                     ),
                 ),
@@ -59,7 +60,7 @@ return array(
                 'options' => array(
                     'route' => '/keep/step/add[/]',
                     'defaults' => array(
-                        'controller' => 'Keep\Controller\Index',
+                        'controller' => 'Step\Controller\Add',
 //                        'action' => 'stepadd',
                     ),
                 ),
@@ -70,22 +71,12 @@ return array(
                 'options' => array(
                     'route' => '/keep/vocation/add[/]',
                     'defaults' => array(
-                        'controller' => 'Keep\Controller\Index',
+                        'controller' => 'Vocation\Controller\Add',
 //                        'action' => 'vocationadd',
                     ),
                 ),
             ),
-/*            'admin_add' => array(
-                'type' => 'Zend\Mvc\Router\Http\Segment',
-                'options' => array(
-                    'route' => '/admin/heros/add[/]',
-                    'defaults' => array(
-                        'controller' => 'Heros\Controller\Index',
-                        'action' => 'heroadd',
-                    ),
-                ),
-            ),
-*/        ),
+        ),
     ),
     'di' => array(
         'services' => array(
@@ -94,7 +85,12 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Keep\Controller\Index' => 'Keep\Controller\IndexController',
+            'Hero\Controller\Add' => 'Keep\Controller\HeroController',
+            'Camp\Controller\Add' => 'Keep\Controller\CampController',
+            'Race\Controller\Add' => 'Keep\Controller\RaceController',
+            'Step\Controller\Add' => 'Keep\Controller\StepController',
+            'Skill\Controller\Add' => 'Keep\Controller\SkillController',
+            'Vocation\Controller\Add' => 'Keep\Controller\VocationController',
         ),
     ),
 );
