@@ -23,37 +23,7 @@ class HeroTable extends AbstractTableGateway implements AdapterAwareInterface
         $this->initialize();
     }
 
-/**
-    public function getByUsername($username)
-    {
-        $rowset = $this->select(array('username' => $username));
 
-        return $rowset->current();
-    }
-
-    public function getById($id)
-    {
-        $rowset = $this->select(array('id' => $id));
-
-        return $rowset->current();
-    }
-
-    public function create($userData)
-    {
-        $userData['created_at'] = new Expression('NOW()');
-
-        return $this->insert($userData);
-    }
-
-    public function updateAvatar($imageId, $userId)
-    {
-        return $this->update(array(
-            'avatar_id' => $imageId
-        ), array(
-            'id' => $userId)
-        );
-    }
-*/
     public function create($heroData)
     {
         $heroData['CreatedAt'] = new Expression('NOW()');

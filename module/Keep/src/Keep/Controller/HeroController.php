@@ -20,7 +20,7 @@ class HeroController extends AbstractRestfulController
 
     public function get($username)
     {
-        die('get function');
+        die('get function herocontroller');
         $usersTable = $this->getUsersTable();
         $userImagesTable = $this->getUserImagesTable();
 
@@ -53,7 +53,7 @@ class HeroController extends AbstractRestfulController
      */
     public function create($unfilteredData)
     {
-
+        die('die create herocontroller');
         $heroTable = $this->getHeroTable();
 //        print_r($heroTable);
         $filters = $heroTable->getInputFilter();
@@ -100,7 +100,7 @@ class HeroController extends AbstractRestfulController
      */
     public function update($id, $data)
     {
-        die('update');
+        die('update herocontroller');
         $this->methodNotAllowed();
     }
 
@@ -111,7 +111,7 @@ class HeroController extends AbstractRestfulController
      */
     public function delete($id)
     {
-        die('delete');
+        die('delete herocontroller');
         $this->methodNotAllowed();
     }
 

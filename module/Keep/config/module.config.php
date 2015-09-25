@@ -22,6 +22,18 @@ return array(
                 ),
             ),
 
+            'keep-herodisplay' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/keep/hero[/]',
+                    'defaults' => array(
+//                        'controller' => 'Keep\Controller\Index',
+                        'controller' => 'Hero\Controller\Display',
+//                        'action' => 'heroadd',
+                    ),
+                ),
+            ),
+
             'keep-campadd' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
@@ -86,6 +98,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Hero\Controller\Add' => 'Keep\Controller\HeroController',
+            'Hero\Controller\Display' => 'Keep\Controller\HeroController',
             'Camp\Controller\Add' => 'Keep\Controller\CampController',
             'Race\Controller\Add' => 'Keep\Controller\RaceController',
             'Step\Controller\Add' => 'Keep\Controller\StepController',
