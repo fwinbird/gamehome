@@ -29,6 +29,10 @@ class HeroTable extends AbstractTableGateway implements AdapterAwareInterface
         $heroData['CreatedAt'] = new Expression('NOW()');
         return $this->insert($heroData);
     }
+    public function getAllRecords(){
+        die('getAllHeros function');
+        return $this->select('*');
+    }
     public function getInputFilter()
     {
         $inputFilter = new InputFilter();

@@ -41,8 +41,14 @@ class HeroController extends AbstractRestfulController
      */
     public function getList()
     {
-        die('getlist  herocontroller');
-        $this->methodNotAllowed();
+//        die('getlist  herocontroller');
+        $heroTable = $this->getHeroTable();
+        $herosData = $heroTable->getAllRecords();
+        if ($herosData !== false) {
+            return new JsonModel($herosData);
+        } else {
+            throw new \Exception('No hero exist', 404);
+        }
     }
 
     /**
@@ -53,27 +59,13 @@ class HeroController extends AbstractRestfulController
      */
     public function create($unfilteredData)
     {
-        die('die create herocontroller');
+//        die('die create herocontroller');
         $heroTable = $this->getHeroTable();
-//        print_r($heroTable);
         $filters = $heroTable->getInputFilter();
-//        print_r($filters);
-//        die('');
         $filters->setData($unfilteredData);
-//        print_r($unfilteredData);
-//        die('');
         if ($filters->isValid()) {
-//            die('filter is valid');
             $data = $filters->getValues();
-//            print_r($data);
-//            die('');
-            /*            $avatarContent = array_key_exists('avatar', $unfilteredData) ? $unfilteredData['avatar'] : NULL;
-
-                        $bcrypt = new Bcrypt();
-                        $data['password'] = $bcrypt->create($data['password']);
-            */
             if ($heroTable->create($data)) {
-//                die('createdtable');
                 $result = new JsonModel(array(
                     'result' => true
                 ));
