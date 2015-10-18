@@ -34,6 +34,11 @@ class RaceTable extends AbstractTableGateway implements AdapterAwareInterface
         $raceData['CreatedAt'] = new Expression('NOW()');
         return $this->insert($raceData);
     }
+
+    public function getAllRecords(){
+        return $this->select(array('RaceID' !== false));
+    }
+
     public function getInputFilter()
     {
         $inputFilter = new InputFilter();

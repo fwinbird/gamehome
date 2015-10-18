@@ -11,29 +11,25 @@ use Zend\InputFilter\Factory as InputFactory;
 class HeroTable extends AbstractTableGateway implements AdapterAwareInterface
 {
     protected $table = 'hero';
-    
-    /**
-     * Set db adapter
-     *
-     * @param Adapter $adapter
-     */
+
     public function setDbAdapter(Adapter $adapter)
     {
         $this->adapter = $adapter;
         $this->initialize();
     }
 
-
     public function create($heroData)
     {
         $heroData['CreatedAt'] = new Expression('NOW()');
         return $this->insert($heroData);
     }
+
     public function getAllRecords(){
 //        die('getAllHeros function');
         return $this->select(array('HeroID' !== false));
 //        return $this->select(array('HeroID' =>'1'));
     }
+
     public function getInputFilter()
     {
         $inputFilter = new InputFilter();

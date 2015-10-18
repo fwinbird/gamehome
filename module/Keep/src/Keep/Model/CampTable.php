@@ -18,11 +18,6 @@ class CampTable extends AbstractTableGateway implements AdapterAwareInterface
 {
     protected $table = 'camp';
 
-    /**
-     * Set db adapter
-     *
-     * @param Adapter $adapter
-     */
     public function setDbAdapter(Adapter $adapter)
     {
         $this->adapter = $adapter;
@@ -34,6 +29,11 @@ class CampTable extends AbstractTableGateway implements AdapterAwareInterface
         $campData['createdAt'] = new Expression('NOW()');
         return $this->insert($campData);
     }
+
+    public function getAllRecords(){
+        return $this->select(array('CampID' !== false));
+    }
+    
     public function getInputFilter()
     {
         $inputFilter = new InputFilter();

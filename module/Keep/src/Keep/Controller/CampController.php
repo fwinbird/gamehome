@@ -38,8 +38,14 @@ class CampController extends AbstractRestfulController
      */
     public function getList()
     {
-        die('getlist');
-        $this->methodNotAllowed();
+//        die('getlist  campcontroller');
+        $campTable = $this->getCampTable();
+        $campsData = $campTable->getAllRecords();
+        if ($campsData !== false) {
+            return new JsonModel($campsData);
+        } else {
+            throw new \Exception('No camp exist', 404);
+        }
     }
 
     /**

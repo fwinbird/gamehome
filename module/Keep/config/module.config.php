@@ -8,7 +8,6 @@ return array(
                 'options' => array(
                     'route' => '/keep/hero/add[/]',
                     'defaults' => array(
-//                        'controller' => 'Keep\Controller\Index',
                         'controller' => 'Hero\Controller\Add',
 //                        'action' => 'heroadd',
                     ),
@@ -20,9 +19,7 @@ return array(
                 'options' => array(
                     'route' => '/keep/hero[/]',
                     'defaults' => array(
-//                        'controller' => 'Keep\Controller\Index',
                         'controller' => 'Hero\Controller\Display',
-//                        'action' => 'heroadd',
                     ),
                 ),
             ),
@@ -81,6 +78,52 @@ return array(
                     ),
                 ),
             ),
+
+            'keep-campdisplay' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/keep/camp[/]',
+                    'defaults' => array(
+                        'controller' => 'Camp\Controller\Display',
+                    ),
+                ),
+            ),
+            'keep-racedisplay' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/keep/race[/]',
+                    'defaults' => array(
+                        'controller' => 'Race\Controller\Display',
+                    ),
+                ),
+            ),
+            'keep-skilldisplay' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/keep/skill[/]',
+                    'defaults' => array(
+                        'controller' => 'Skill\Controller\Display',
+                    ),
+                ),
+            ),
+            'keep-stepdisplay' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/keep/step[/]',
+                    'defaults' => array(
+                        'controller' => 'Step\Controller\Display',
+                    ),
+                ),
+            ),
+            'keep-vocationdisplay' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/keep/vocation[/]',
+                    'defaults' => array(
+                        'controller' => 'Vocation\Controller\Display',
+                    ),
+                ),
+            ),
         ),
     ),
     'di' => array(
@@ -97,6 +140,11 @@ return array(
             'Step\Controller\Add' => 'Keep\Controller\StepController',
             'Skill\Controller\Add' => 'Keep\Controller\SkillController',
             'Vocation\Controller\Add' => 'Keep\Controller\VocationController',
+            'Camp\Controller\Display' => 'Keep\Controller\CampController',
+            'Race\Controller\Display' => 'Keep\Controller\RaceController',
+            'Step\Controller\Display' => 'Keep\Controller\StepController',
+            'Skill\Controller\Display' => 'Keep\Controller\SkillController',
+            'Vocation\Controller\Display' => 'Keep\Controller\VocationController',
         ),
     ),
 );

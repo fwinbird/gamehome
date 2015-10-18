@@ -38,8 +38,14 @@ class RaceController extends AbstractRestfulController
      */
     public function getList()
     {
-        die('getlist');
-        $this->methodNotAllowed();
+//        die('getlist  racecontroller');
+        $raceTable = $this->getRaceTable();
+        $racesData = $raceTable->getAllRecords();
+        if ($racesData !== false) {
+            return new JsonModel($racesData);
+        } else {
+            throw new \Exception('No race exist', 404);
+        }
     }
 
     /**
@@ -50,7 +56,7 @@ class RaceController extends AbstractRestfulController
      */
     public function create($unfilteredData)
     {
-
+        die('die create function in racecontroller');
         $raceTable = $this->getRaceTable();
 //        print_r($raceTable);
         $filters = $raceTable->getInputFilter();
