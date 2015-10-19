@@ -56,7 +56,7 @@ class RaceController extends AbstractRestfulController
      */
     public function create($unfilteredData)
     {
-        die('die create function in racecontroller');
+//        die('die create function in racecontroller');
         $raceTable = $this->getRaceTable();
 //        print_r($raceTable);
         $filters = $raceTable->getInputFilter();
