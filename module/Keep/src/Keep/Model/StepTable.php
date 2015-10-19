@@ -34,6 +34,11 @@ class StepTable extends AbstractTableGateway implements AdapterAwareInterface
         $stepData['createdAt'] = new Expression('NOW()');
         return $this->insert($stepData);
     }
+
+    public function getAllRecords(){
+        return $this->select(array('StepID' !== false));
+    }
+
     public function getInputFilter()
     {
         $inputFilter = new InputFilter();

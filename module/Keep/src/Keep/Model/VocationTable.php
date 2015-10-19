@@ -34,6 +34,11 @@ class VocationTable extends AbstractTableGateway implements AdapterAwareInterfac
         $vocationData['createdAt'] = new Expression('NOW()');
         return $this->insert($vocationData);
     }
+
+    public function getAllRecords(){
+        return $this->select(array('VocationID' !== false));
+    }
+
     public function getInputFilter()
     {
         $inputFilter = new InputFilter();

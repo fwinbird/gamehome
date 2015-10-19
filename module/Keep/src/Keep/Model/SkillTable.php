@@ -34,6 +34,11 @@ class SkillTable extends AbstractTableGateway implements AdapterAwareInterface
         $skillData['createdAt'] = new Expression('NOW()');
         return $this->insert($skillData);
     }
+
+    public function getAllRecords(){
+        return $this->select(array('SkillID' !== false));
+    }
+
     public function getInputFilter()
     {
         $inputFilter = new InputFilter();

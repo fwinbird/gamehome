@@ -44,8 +44,14 @@ class StepController extends AbstractRestfulController
      */
     public function getList()
     {
-        die('getlist');
-        $this->methodNotAllowed();
+//        die('getlist  stepcontroller');
+        $stepTable = $this->getStepTable();
+        $stepsData = $stepTable->getAllRecords();
+        if ($stepsData !== false) {
+            return new JsonModel($stepsData);
+        } else {
+            throw new \Exception('No step exist', 404);
+        }
     }
 
     /**

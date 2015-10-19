@@ -44,8 +44,14 @@ class VocationController extends AbstractRestfulController
      */
     public function getList()
     {
-        die('getlist');
-        $this->methodNotAllowed();
+//        die('getlist  vocationcontroller');
+        $vocationTable = $this->getVocationTable();
+        $vocationsData = $vocationTable->getAllRecords();
+        if ($vocationsData !== false) {
+            return new JsonModel($vocationsData);
+        } else {
+            throw new \Exception('No vocation exist', 404);
+        }
     }
 
     /**

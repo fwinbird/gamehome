@@ -44,8 +44,14 @@ class SkillController extends AbstractRestfulController
      */
     public function getList()
     {
-        die('getlist');
-        $this->methodNotAllowed();
+//        die('getlist  skillcontroller');
+        $skillTable = $this->getSkillTable();
+        $skillsData = $skillTable->getAllRecords();
+        if ($skillsData !== false) {
+            return new JsonModel($skillsData);
+        } else {
+            throw new \Exception('No skill exist', 404);
+        }
     }
 
     /**
