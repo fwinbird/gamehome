@@ -133,18 +133,4 @@ class CampController extends AbstractRestfulController
         return $this->campTable;
     }
 
-    /**
-     * This is a convenience method to load the userImagesTable db object and keeps track
-     * of the instance to avoid multiple of them
-     *
-     * @return UserImagesTable
-     */
-    protected function getUserImagesTable()
-    {
-        if (!$this->userImagesTable) {
-            $sm = $this->getServiceLocator();
-            $this->userImagesTable = $sm->get('Users\Model\UserImagesTable');
-        }
-        return $this->userImagesTable;
-    }
 }

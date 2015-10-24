@@ -88,6 +88,7 @@ return array(
                     ),
                 ),
             ),
+
             'keep-racedisplay' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
@@ -97,6 +98,7 @@ return array(
                     ),
                 ),
             ),
+
             'keep-skilldisplay' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
@@ -106,6 +108,7 @@ return array(
                     ),
                 ),
             ),
+
             'keep-stepdisplay' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
@@ -115,6 +118,7 @@ return array(
                     ),
                 ),
             ),
+
             'keep-vocationdisplay' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
@@ -124,6 +128,52 @@ return array(
                     ),
                 ),
             ),
+
+            'keep-gameuser-info' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/keep/gameuser/:id[/]',
+                    'constraints' => array(
+                        'id' => '\d*',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Keep\Controller\Gameuser',
+                    ),
+                ),
+            ),
+
+            'keep-gameuser-updategold' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/keep/gameuser/updategold[/]',
+                    'defaults' => array(
+                        'controller' => 'Keep\Controller\Gameuser',
+                    ),
+                ),
+            ),
+
+            'keep-gameuser-update' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/keep/gameuser/update/:id[/]',
+                    'constraints' => array(
+                        'id' => '\d*',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Keep\Controller\Gameuser',
+                    ),
+                ),
+            ),
+/*            'keep-gameuser-updatefaith' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/keep/gameuser/updatefaith[/]',
+                    'defaults' => array(
+                        'controller' => 'Keep\Controller\Gameuser',
+                    ),
+                ),
+            ),
+            */
         ),
     ),
     'di' => array(
@@ -145,6 +195,7 @@ return array(
             'Step\Controller\Display' => 'Keep\Controller\StepController',
             'Skill\Controller\Display' => 'Keep\Controller\SkillController',
             'Vocation\Controller\Display' => 'Keep\Controller\VocationController',
+            'Keep\Controller\Gameuser' => 'Keep\Controller\GameuserController',
         ),
     ),
 );

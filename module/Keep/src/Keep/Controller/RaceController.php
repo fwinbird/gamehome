@@ -81,7 +81,7 @@ class RaceController extends AbstractRestfulController
                 ));
             }
         } else {
-            die('filter is not valid');
+//            die('filter is not valid');
             $result = new JsonModel(array(
                 'result' => false,
                 'errors' => $filters->getMessages()
