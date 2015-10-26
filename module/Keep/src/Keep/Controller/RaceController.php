@@ -56,22 +56,12 @@ class RaceController extends AbstractRestfulController
      */
     public function create($unfilteredData)
     {
-//        die('die create function in racecontroller');
         $raceTable = $this->getRaceTable();
-//        print_r($raceTable);
         $filters = $raceTable->getInputFilter();
-//        print_r($filters);
-//        die('');
         $filters->setData($unfilteredData);
-//        print_r($unfilteredData);
-//        die('');
         if ($filters->isValid()) {
-//            die('filter is valid');
             $data = $filters->getValues();
-//            print_r($data);
-//            die('');
             if ($raceTable->create($data)) {
-//                die('createdtable');
                 $result = new JsonModel(array(
                     'result' => true
                 ));
@@ -81,13 +71,11 @@ class RaceController extends AbstractRestfulController
                 ));
             }
         } else {
-//            die('filter is not valid');
             $result = new JsonModel(array(
                 'result' => false,
                 'errors' => $filters->getMessages()
             ));
         }
-
         return $result;
     }
 

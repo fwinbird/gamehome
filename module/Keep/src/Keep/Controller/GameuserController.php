@@ -25,14 +25,20 @@ class GameuserController extends AbstractRestfulController
     public function get($id)
     {
     	$gameuserTable = $this->getGameuserTable();
-        
-        $gameuserData = $gameuserTable->getbyid($id);
+        $gameuserData = $gameuserTable->getallinfobyid($id);
+        $mainuserDate = $gameuserTable->getinfobyid_4($id);
 
+//        $JData = new JsonModel($gameuserData);
+//        print_r($JData);
+//        $mainDate = array("id"=> $JData->get('id'), "username" =>$JData->get('username') , "gold" =>$JData->get('gold') ,"faith" => $JData->get('faith'));
+//        $mainDate = array("id" => $JData[0]->id);
+//        return $JData;
         if ($gameuserData !== false) {
             return new JsonModel($gameuserData);
         } else {
             throw new \Exception('Gameuser not found', 404);
         }
+
     }
 
     public function getList()
@@ -43,27 +49,13 @@ class GameuserController extends AbstractRestfulController
 
     public function create($unfilteredData)
     {
-
         $heroTable = $this->getHeroTable();
-//        print_r($heroTable);
         $filters = $heroTable->getInputFilter();
-//        print_r($filters);
-//        die('');
         $filters->setData($unfilteredData);
-//        print_r($unfilteredData);
-//        die('');
+
         if ($filters->isValid()) {
-//            die('filter is valid');
             $data = $filters->getValues();
-//            print_r($data);
-//            die('');
-/*            $avatarContent = array_key_exists('avatar', $unfilteredData) ? $unfilteredData['avatar'] : NULL;
-            
-            $bcrypt = new Bcrypt();
-            $data['password'] = $bcrypt->create($data['password']);
-*/
             if ($heroTable->create($data)) {
-//                die('createdtable');
                 $result = new JsonModel(array(
                     'result' => true
                 ));
@@ -79,16 +71,29 @@ class GameuserController extends AbstractRestfulController
                 'errors' => $filters->getMessages()
             ));
         }
-        
         return $result;
     }
 
     public function update($id, $data)
     {
-        print_r($id);
-        print_r($data);
-        die();
-    	$this->methodNotAllowed();
+        $gameuserTable = $this->getGameuserTable();
+
+        if(array_key_exists('gold',$data))
+        {
+            $value = $data['gold'];
+//            if(is_int($value))
+                if(1<=$value&&$value<=100000)
+                    $gameuserTable->updategold($id, $value);
+        }
+
+        if(array_key_exists('faith',$data))
+        {
+            $value = $data['faith'];
+//            if(is_int($value))
+                if(1<=$value&&$value<=100000)
+                    $gameuserTable->updatefaith($id, $value);
+        }
+        return;
     }
 
     public function delete($id)

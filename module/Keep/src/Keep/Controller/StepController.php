@@ -62,22 +62,12 @@ class StepController extends AbstractRestfulController
      */
     public function create($unfilteredData)
     {
-
         $stepTable = $this->getStepTable();
-//        print_r($stepTable);
         $filters = $stepTable->getInputFilter();
-//        print_r($filters);
-//        die('');
         $filters->setData($unfilteredData);
-//        print_r($unfilteredData);
-//        die('');
         if ($filters->isValid()) {
-//            die('filter is valid');
             $data = $filters->getValues();
-//            print_r($data);
-//            die('');
             if ($stepTable->create($data)) {
-//                die('createdtable');
                 $result = new JsonModel(array(
                     'result' => true
                 ));
@@ -87,13 +77,11 @@ class StepController extends AbstractRestfulController
                 ));
             }
         } else {
-            die('filter is not valid');
             $result = new JsonModel(array(
                 'result' => false,
                 'errors' => $filters->getMessages()
             ));
         }
-
         return $result;
     }
 

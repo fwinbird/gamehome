@@ -23,7 +23,6 @@ class HeroController extends AbstractRestfulController
         die('get function herocontroller');
         $usersTable = $this->getUsersTable();
         $userImagesTable = $this->getUserImagesTable();
-
         $userData = $usersTable->getByUsername($username);
 
         if ($userData !== false) {
@@ -75,7 +74,6 @@ class HeroController extends AbstractRestfulController
                 ));
             }
         } else {
-            die('filter is not valid');
             $result = new JsonModel(array(
                 'result' => false,
                 'errors' => $filters->getMessages()

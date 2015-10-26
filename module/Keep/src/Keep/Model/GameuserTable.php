@@ -34,11 +34,40 @@ class GameuserTable extends AbstractTableGateway implements AdapterAwareInterfac
         return $this->select(array('id' !== false));
     }
 
-    public function getbyid($id)
+    public function getallinfobyid($id)
     {
         return $this->select(array('id' => $id));
     }
-    
+
+    public function getinfobyid_4($id)
+    {
+        return $this->select(array('id' => $id),array('id','username','gold','faith'));
+//        $result = mysql_query("SELECT * FROM Persons");
+
+    }
+
+    public function updategold($id, $data)
+    {
+            return $this->update(array(
+                'gold' =>$data
+            ), array(
+                    'id' => $id)
+            );
+    }
+
+    public function updatefaith($id, $data)
+    {
+        return $this->update(array(
+            'faith' =>$data
+        ), array(
+                'id' => $id)
+        );
+    }
+
+    public function getid()
+    {
+        return $this->id();
+    }
 /*    public function getInputFilter()
     {
         $inputFilter = new InputFilter();

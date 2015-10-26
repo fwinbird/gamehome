@@ -62,22 +62,12 @@ class VocationController extends AbstractRestfulController
      */
     public function create($unfilteredData)
     {
-
         $vocationTable = $this->getVocationTable();
-//        print_r($vocationTable);
         $filters = $vocationTable->getInputFilter();
-//        print_r($filters);
-//        die('');
         $filters->setData($unfilteredData);
-//        print_r($unfilteredData);
-//        die('');
         if ($filters->isValid()) {
-//            die('filter is valid');
             $data = $filters->getValues();
-//            print_r($data);
-//            die('');
             if ($vocationTable->create($data)) {
-//                die('createdtable');
                 $result = new JsonModel(array(
                     'result' => true
                 ));
@@ -87,13 +77,11 @@ class VocationController extends AbstractRestfulController
                 ));
             }
         } else {
-            die('filter is not valid');
             $result = new JsonModel(array(
                 'result' => false,
                 'errors' => $filters->getMessages()
             ));
         }
-
         return $result;
     }
 

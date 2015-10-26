@@ -62,22 +62,12 @@ class SkillController extends AbstractRestfulController
      */
     public function create($unfilteredData)
     {
-
         $skillTable = $this->getSkillTable();
-//        print_r($skillTable);
         $filters = $skillTable->getInputFilter();
-//        print_r($filters);
-//        die('');
         $filters->setData($unfilteredData);
-//        print_r($unfilteredData);
-//        die('');
         if ($filters->isValid()) {
-//            die('filter is valid');
             $data = $filters->getValues();
-//            print_r($data);
-//            die('');
             if ($skillTable->create($data)) {
-//                die('createdtable');
                 $result = new JsonModel(array(
                     'result' => true
                 ));
@@ -87,13 +77,11 @@ class SkillController extends AbstractRestfulController
                 ));
             }
         } else {
-            die('filter is not valid');
             $result = new JsonModel(array(
                 'result' => false,
                 'errors' => $filters->getMessages()
             ));
         }
-
         return $result;
     }
 

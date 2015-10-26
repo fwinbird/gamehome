@@ -184,12 +184,5 @@ class IndexController extends AbstractRestfulController
      *
      * @return UserImagesTable
      */
-    protected function getUserImagesTable()
-    {
-        if (!$this->userImagesTable) {
-            $sm = $this->getServiceLocator();
-            $this->userImagesTable = $sm->get('Users\Model\UserImagesTable');
-        }
-        return $this->userImagesTable;
-    }
+
 }
