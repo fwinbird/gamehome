@@ -11,11 +11,7 @@ namespace Keep;
 
 class Module
 {
-    /**
-     * Convenience method to return the config file
-     *
-     * @return string
-     */
+
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';

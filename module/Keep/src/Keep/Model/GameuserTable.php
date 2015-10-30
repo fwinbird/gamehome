@@ -68,13 +68,14 @@ class GameuserTable extends AbstractTableGateway implements AdapterAwareInterfac
     {
         return $this->id();
     }
-/*    public function getInputFilter()
+
+    public function getInputFilter()
     {
         $inputFilter = new InputFilter();
         $factory = new InputFactory();
 
         $inputFilter->add($factory->createInput(array(
-            'name'     => 'campname',
+            'name'     => 'username',
             'required' => true,
             'filters'  => array(
                 array('name' => 'StripTags'),
@@ -94,8 +95,8 @@ class GameuserTable extends AbstractTableGateway implements AdapterAwareInterfac
                 array(
                     'name' => 'Zend\Validator\Db\NoRecordExists',
                     'options' => array(
-                        'table' => 'camp',
-                        'field' => 'campname',
+                        'table' => 'game_users',
+                        'field' => 'username',
                         'adapter' => $this->adapter
                     )
                 )
@@ -103,7 +104,53 @@ class GameuserTable extends AbstractTableGateway implements AdapterAwareInterfac
         )));
 
         $inputFilter->add($factory->createInput(array(
-            'name'     => 'textcn',
+            'name'     => 'email',
+            'required' => true,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+                array(
+                    'name' => 'NotEmpty',
+                ),
+                array(
+                    'name' => 'StringLength',
+                    'options' => array(
+                        'min' => 6,
+                        'max' => 254
+                    ),
+                ),
+                array(
+                    'name' => 'EmailAddress',
+                ),
+                array(
+                    'name' => 'Zend\Validator\Db\NoRecordExists',
+                    'options' => array(
+                        'table' => 'game_users',
+                        'field' => 'email',
+                        'adapter' => $this->adapter
+                    )
+                )
+            ),
+        )));
+
+        $inputFilter->add($factory->createInput(array(
+            'name'     => 'password',
+            'required' => true,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+                array(
+                    'name' => 'NotEmpty',
+                ),
+            ),
+        )));
+
+        $inputFilter->add($factory->createInput(array(
+            'name'     => 'name',
             'required' => true,
             'filters'  => array(
                 array('name' => 'StripTags'),
@@ -117,13 +164,39 @@ class GameuserTable extends AbstractTableGateway implements AdapterAwareInterfac
                     'name' => 'StringLength',
                     'options' => array(
                         'min' => 1,
-                        'max' => 50
-                    ),
+                        'max' => 25
+                    )
+                ),
+            ),
+        )));
+
+        $inputFilter->add($factory->createInput(array(
+            'name'     => 'location',
+            'required' => false,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
+        )));
+
+        $inputFilter->add($factory->createInput(array(
+            'name'     => 'gender',
+            'required' => false,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+                array('name' => 'Int'),
+            ),
+            'validators' => array(
+                array(
+                    'name' => 'InArray',
+                    'options' => array(
+                        'haystack' => array('0', '1')
+                    )
                 ),
             ),
         )));
 
         return $inputFilter;
     }
-    */
 }

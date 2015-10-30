@@ -164,16 +164,16 @@ return array(
                     ),
                 ),
             ),
-/*            'keep-gameuser-updatefaith' => array(
+            'keep-gameuser-register' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route' => '/keep/gameuser/updatefaith[/]',
+                    'route' => '/keep/gameuser/register[/]',
                     'defaults' => array(
                         'controller' => 'Keep\Controller\Gameuser',
                     ),
                 ),
             ),
-            */
+
         ),
     ),
     'di' => array(

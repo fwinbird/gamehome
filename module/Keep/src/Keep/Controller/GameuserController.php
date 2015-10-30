@@ -49,28 +49,26 @@ class GameuserController extends AbstractRestfulController
 
     public function create($unfilteredData)
     {
-        $heroTable = $this->getHeroTable();
-        $filters = $heroTable->getInputFilter();
+        $gameusersTable = $this->getGameusersTable();
+        $filters = $gameusersTable->getInputFilter();
         $filters->setData($unfilteredData);
 
-        if ($filters->isValid()) {
-            $data = $filters->getValues();
-            if ($heroTable->create($data)) {
-                $result = new JsonModel(array(
-                    'result' => true
-                ));
-            } else {
-                $result = new JsonModel(array(
-                    'result' => false
-                )); 
-            }
-        } else {
-            die('filter is not valid');
-            $result = new JsonModel(array(
-                'result' => false,
-                'errors' => $filters->getMessages()
-            ));
-        }
+                if ($filters->isValid()) {
+                    $data = $filters->getValues();
+                    $gameusersTable->create($data);
+                    $bcrypt = new Bcrypt();
+                    $data['password'] = $bcrypt->create($data['password']);
+
+                    $result = new JsonModel(array(
+                        'result' => true
+                    ));
+                } else {
+                    $result = new JsonModel(array(
+                        'result' => false,
+                        'errors' => $filters->getMessages()
+                    ));
+                }
+
         return $result;
     }
 
@@ -107,7 +105,7 @@ class GameuserController extends AbstractRestfulController
         $this->response->setStatusCode(\Zend\Http\PhpEnvironment\Response::STATUS_CODE_405);
     }
 
-    protected function getGameuserTable()
+    protected function getGameusersTable()
     {
         if (!$this->gameuserTable) {
             $sm = $this->getServiceLocator();
