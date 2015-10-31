@@ -49,13 +49,13 @@ class GameuserController extends AbstractRestfulController
 
     public function create($unfilteredData)
     {
-        $gameusersTable = $this->getGameusersTable();
-        $filters = $gameusersTable->getInputFilter();
+        $gameuserTable = $this->getGameuserTable();
+        $filters = $gameuserTable->getInputFilter();
         $filters->setData($unfilteredData);
 
                 if ($filters->isValid()) {
                     $data = $filters->getValues();
-                    $gameusersTable->create($data);
+                    $gameuserTable->create($data);
                     $bcrypt = new Bcrypt();
                     $data['password'] = $bcrypt->create($data['password']);
 
@@ -105,7 +105,7 @@ class GameuserController extends AbstractRestfulController
         $this->response->setStatusCode(\Zend\Http\PhpEnvironment\Response::STATUS_CODE_405);
     }
 
-    protected function getGameusersTable()
+    protected function getGameuserTable()
     {
         if (!$this->gameuserTable) {
             $sm = $this->getServiceLocator();
