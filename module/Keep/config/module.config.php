@@ -179,6 +179,7 @@ return array(
                     'route' => '/keep/vocation/getname[/]',
                     'defaults' => array(
                         'controller' => 'Keep\Controller\Vocation',
+                        'action' => 'getallnames',
                     ),
                 ),
             ),

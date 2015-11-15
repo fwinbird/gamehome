@@ -17,7 +17,7 @@ use Zend\InputFilter\Factory as InputFactory;
 class VocationTable extends AbstractTableGateway implements AdapterAwareInterface
 {
     protected $table = 'vocation';
-
+    const TABLE_NAME = 'vocation';
     /**
      * Set db adapter
      *
@@ -38,6 +38,14 @@ class VocationTable extends AbstractTableGateway implements AdapterAwareInterfac
     public function getAllRecords(){
         return $this->select(array('VocationID' !== false));
     }
+
+    public function getAllNames(){
+
+        $sql = $this->sql->select(array('VocationName'));
+        die('ddddddddddddddddddddd');
+        return $this->selectWith($sql) ;
+    }
+
 
     public function getInputFilter()
     {

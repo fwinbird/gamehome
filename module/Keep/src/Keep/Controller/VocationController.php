@@ -21,6 +21,17 @@ class VocationController extends AbstractRestfulController
 {
     protected $vocationTable;
 
+    public function getallnamesAction()
+    {
+ //       die('getallnames function');
+        $vocationTable = $this->getVocationTable();
+        $vocationNames = $vocationTable->getAllNames();
+        if ($vocationNames !== false) {
+            return new JsonModel($vocationNames);
+        } else {
+            throw new \Exception('No vocation exist', 404);
+        }
+    }
     public function get($username)
     {
         die('get function');
@@ -37,11 +48,6 @@ class VocationController extends AbstractRestfulController
         }
     }
 
-    /**
-     * Method not available for this endpoint
-     *
-     * @return void
-     */
     public function getList()
     {
 //        die('getlist  vocationcontroller');
