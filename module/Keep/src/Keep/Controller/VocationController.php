@@ -26,6 +26,11 @@ class VocationController extends AbstractRestfulController
  //       die('getallnames function');
         $vocationTable = $this->getVocationTable();
         $vocationNames = $vocationTable->getAllNames();
+
+        //此处对数据库里select返回的数据做处理
+        print_r($vocationNames);
+        die();
+
         if ($vocationNames !== false) {
             return new JsonModel($vocationNames);
         } else {

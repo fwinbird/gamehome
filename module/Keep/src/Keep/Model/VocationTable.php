@@ -40,10 +40,8 @@ class VocationTable extends AbstractTableGateway implements AdapterAwareInterfac
     }
 
     public function getAllNames(){
-
-        $sql = $this->sql->select(array('VocationName'));
-        die('ddddddddddddddddddddd');
-        return $this->selectWith($sql) ;
+        $vocationnames = $this->sql->select()->columns(array('VocationName'))->where(array('VocationID' !== false))->order('CreatedAt DESC');
+        return $this->selectWith($vocationnames) ;
     }
 
 

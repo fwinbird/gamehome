@@ -176,7 +176,7 @@ return array(
             'keep-vocation-getname' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route' => '/keep/vocation/getname[/]',
+                    'route' => '/keep/vocation/getnames[/]',
                     'defaults' => array(
                         'controller' => 'Keep\Controller\Vocation',
                         'action' => 'getallnames',
@@ -187,7 +187,7 @@ return array(
             'keep-race-getname' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route' => '/keep/race/getname[/]',
+                    'route' => '/keep/race/getnames[/]',
                     'defaults' => array(
                         'controller' => 'Keep\Controller\Race',
                     ),
