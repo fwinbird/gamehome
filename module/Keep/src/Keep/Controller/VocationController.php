@@ -27,12 +27,24 @@ class VocationController extends AbstractRestfulController
         $vocationTable = $this->getVocationTable();
         $vocationNames = $vocationTable->getAllNames();
 
-        //此处对数据库里select返回的数据做处理
-        print_r($vocationNames);
-        die();
+        //瀵规暟鎹簱杩斿洖鐨勮褰曞仛澶勭悊
+        $vnames=array();
+        $i=0;
+        foreach($vocationNames as $v)
+        {
+//            print_r($v);
+//            print_r($v['VocationName']);
+//            print_r($v['TextCN']);
+//            print_r('<br/>');
+            $vnames[$i]=$v['VocationName'] . $v['TextCN'];
+            print_r($vnames[$i]);
+            $i++;
+        }
 
-        if ($vocationNames !== false) {
-            return new JsonModel($vocationNames);
+
+        if ($vnames !== false) {
+//            return new JsonModel($vnames);
+            return $vnames;
         } else {
             throw new \Exception('No vocation exist', 404);
         }
