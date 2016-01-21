@@ -31,6 +31,26 @@ class RaceController extends AbstractRestfulController
         }
     }
 
+    public function getallnamesAction()
+    {
+        //       die('getallnames function');
+        $raceTable = $this->getRaceTable();
+        $raceNames = $raceTable->getAllNames();
+
+        //对数据库返回的记录做处理
+        $vnames=array();
+        $i=0;
+        foreach($raceNames as $v)
+        {
+            $vnames[$i]=$v['RaceName'] . $v['TextCN'];
+            $i++;
+        }
+        if ($vnames !== false) {
+            return new JsonModel($vnames);
+        } else {
+            throw new \Exception('No race exist', 404);
+        }
+    }
     /**
      * Method not available for this endpoint
      *

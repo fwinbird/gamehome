@@ -190,6 +190,7 @@ return array(
                     'route' => '/keep/race/getnames[/]',
                     'defaults' => array(
                         'controller' => 'Keep\Controller\Race',
+                        'action' => 'getallnames',
                     ),
                 ),
             ),

@@ -38,6 +38,11 @@ class RaceTable extends AbstractTableGateway implements AdapterAwareInterface
     public function getAllRecords(){
         return $this->select(array('RaceID' !== false));
     }
+    
+    public function getAllNames(){
+        $racenames = $this->sql->select()->columns(array('RaceName','TextCN'))->where(array('RaceID' !== false))->order('RaceName ASC');
+        return $this->selectWith($racenames) ;
+    }
 
     public function getInputFilter()
     {

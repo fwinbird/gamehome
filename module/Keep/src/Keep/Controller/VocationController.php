@@ -32,19 +32,11 @@ class VocationController extends AbstractRestfulController
         $i=0;
         foreach($vocationNames as $v)
         {
-//            print_r($v);
-//            print_r($v['VocationName']);
-//            print_r($v['TextCN']);
-//            print_r('<br/>');
             $vnames[$i]=$v['VocationName'] . $v['TextCN'];
-            print_r($vnames[$i]);
             $i++;
         }
-
-
         if ($vnames !== false) {
-//            return new JsonModel($vnames);
-            return $vnames;
+            return new JsonModel($vnames);
         } else {
             throw new \Exception('No vocation exist', 404);
         }
