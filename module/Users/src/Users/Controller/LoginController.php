@@ -34,6 +34,7 @@ class LoginController extends AbstractRestfulController
      */
     public function get($username)
     {
+        die('get');
         $this->methodNotAllowed();
     }
     

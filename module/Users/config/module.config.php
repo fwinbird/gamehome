@@ -20,9 +20,9 @@ return array(
                 ),
             ),
             'login' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route' => '/users/login',
+                    'route' => '/users/login[/]',
                     'defaults' => array(
                         'controller' => 'Users\Controller\Login'
                     ),
