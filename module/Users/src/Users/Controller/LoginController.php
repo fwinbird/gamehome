@@ -34,7 +34,7 @@ class LoginController extends AbstractRestfulController
      */
     public function get($username)
     {
-        die('get');
+        die('getfunction in logincontroller');
         $this->methodNotAllowed();
     }
     
@@ -56,8 +56,7 @@ class LoginController extends AbstractRestfulController
      */
     public function create($data)
     {
-//        print_r($data);
-        die('function create at api ');
+//        die('function create at logincontroller ');
         $usersTable = $this->getUsersTable();
         $user = $usersTable->getByUsername($data['username']);
         
@@ -73,8 +72,29 @@ class LoginController extends AbstractRestfulController
                 'errors' => 'Invalid Username or password'
             ));
         }
-        
         return $result;
+////////////////////////////
+/*        public function create($data)
+        {
+            $usersTable = $this->getUsersTable();
+            $user = $usersTable->getByUsername($data['username']);
+            $bcrypt = new Bcrypt();
+            if (!empty($user) &&$bcrypt->verify(
+                    $data['password'],
+                    $user->password)
+            ) {
+                $result = new JsonModel(array(
+                    'result' => true,
+                    'errors' => null
+                ));
+            } else {
+                $result = new JsonModel(array(
+                    'result' => false,
+                    'errors' => 'Invalid Username or password'
+                ));
+            }
+            return $result;
+*/
     }
     
     /**
